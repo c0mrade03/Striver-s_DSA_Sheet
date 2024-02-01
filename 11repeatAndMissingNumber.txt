@@ -1,45 +1,45 @@
 pair<int, int> missingAndRepeating(vector<int> &arr, int n)
 {
-    int xr = 0;
-    for (int i = 0; i < n; i++)
+  int xr = 0;
+  for (int i = 0; i < n; i++)
+  {
+    xr ^= arr[i] ^ (i + 1);
+  }
+
+  // Find the rightmost set bit in xr
+  int rightmostSetBit = xr & -xr;
+
+  int missing = 0, repeating = 0;
+
+  for (int i = 0; i < n; i++)
+  {
+    // Divide numbers into two groups based on rightmost set bit
+    if (arr[i] & rightmostSetBit)
     {
-        xr ^= arr[i] ^ (i + 1);
+      missing ^= arr[i];
     }
-
-    // Find the rightmost set bit in xr
-    int rightmostSetBit = xr & -xr;
-
-    int missing = 0, repeating = 0;
-
-    for (int i = 0; i < n; i++)
+    else
     {
-        // Divide numbers into two groups based on rightmost set bit
-        if (arr[i] & rightmostSetBit)
-        {
-            missing ^= arr[i];
-        }
-        else
-        {
-            repeating ^= arr[i];
-        }
-        if ((i + 1) & rightmostSetBit)
-        {
-            missing ^= (i + 1);
-        }
-        else
-        {
-            repeating ^= (i + 1);
-        }
+      repeating ^= arr[i];
     }
-
-    // Check which one is the repeating element
-    for (int i = 0; i < n; i++)
+    if ((i + 1) & rightmostSetBit)
     {
-        if (arr[i] == repeating)
-        {
-            return {missing, repeating};
-        }
+      missing ^= (i + 1);
     }
+    else
+    {
+      repeating ^= (i + 1);
+    }
+  }
 
-    return {repeating, missing};
+  // Check which one is the repeating element
+  for (int i = 0; i < n; i++)
+  {
+    if (arr[i] == repeating)
+    {
+      return {missing, repeating};
+    }
+  }
+
+  return {repeating, missing};
 }

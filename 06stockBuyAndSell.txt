@@ -1,20 +1,20 @@
 class Solution
 {
 public:
-    int maxProfit(vector<int> &prices)
+  int maxProfit(vector<int> &prices)
+  {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n = prices.size();
+    int ans = 0;
+    int maxi = 0;
+
+    for (int i = n - 1; i >= 0; i--)
     {
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
-        int n = prices.size();
-        int ans = 0;
-        int maxi = 0;
-
-        for (int i = n - 1; i >= 0; i--)
-        {
-            maxi = max(maxi, prices[i]);
-            ans = max(ans, maxi - prices[i]);
-        }
-
-        return ans;
+      maxi = max(maxi, prices[i]);
+      ans = max(ans, maxi - prices[i]);
     }
+
+    return ans;
+  }
 };
