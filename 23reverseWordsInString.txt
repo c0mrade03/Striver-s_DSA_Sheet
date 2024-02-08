@@ -1,0 +1,39 @@
+class Solution
+{
+public:
+  string reverseWords(string s)
+  {
+    vector<string> v;
+    string cmp;
+
+    for (char &i : s)
+    {
+      if (i == ' ')
+      {
+        if (cmp.size() > 0)
+        {
+          v.push_back(cmp);
+        }
+        cmp.erase();
+      }
+      else
+      {
+        cmp.push_back(i);
+      }
+    }
+    if (cmp.size() > 0)
+    {
+      v.push_back(cmp);
+    }
+
+    int n = v.size();
+    string ans = v[n - 1];
+    for (int i = n - 2; i >= 0; i--)
+    {
+      ans += " ";
+      ans += v[i];
+    }
+
+    return ans;
+  }
+};
