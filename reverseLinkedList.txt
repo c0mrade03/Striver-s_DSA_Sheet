@@ -8,23 +8,36 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
- // Using iterative method
-
-class Solution {
+class Solution
+{
 public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode* temp = head;
-        ListNode* prev = nullptr;
+  ListNode *reverseList(ListNode *head)
+  {
+    // using iterative method
 
-        while(temp != nullptr){
-            ListNode* front = temp->next;
-            temp->next = prev;
-            prev = temp;
-            temp = front;
-        }
-        return prev;
+    // ListNode* temp = head;
+    // ListNode* prev = nullptr;
+
+    // while(temp != nullptr){
+    //     ListNode* front = temp->next;
+    //     temp->next = prev;
+    //     prev = temp;
+    //     temp = front;
+    // }
+    // return prev;
+
+    // using recursion
+
+    if (head == nullptr || head->next == nullptr)
+    {
+      return head;
     }
-};
 
-// Using recursion
+    ListNode *newHead = reverseList(head->next);
+    ListNode *front = head->next;
+    front->next = head;
+    head->next = nullptr;
+
+    return newHead;
+  }
+};
